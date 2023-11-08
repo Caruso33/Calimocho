@@ -2,9 +2,9 @@
 
 ## Schema
 
-documentCid -> string ?
 votingOptions -> uint8
-expirationDate -> ?
+expiration -> uint64
+documentCid -> string
 
 owner -> address
 attester -> address
@@ -14,7 +14,8 @@ attester -> address
 verifyAttestation - tests fields from above with the signature if are valid
 
 the participant is part of the group of the cid
-expirationDate is not yet reached
+expiration is not yet reached
+quorum is not yet reached
 
 ## Calimocho Contract
 

@@ -14,29 +14,36 @@ contract Calimocho {
         address owner;
         string documentCid;
         address[] participants;
+        uint64 expiration;
         uint quorum;
-        string expiration;
+        uint8[] currentVotes;
     }
 
     function registerDocument(
         string memory _documentCid,
-        address[] memory participants,
-        uint256 quorum,
-        string memory expiration
+        address[] memory _participants,
+        uint64 _expiration,
+        uint256 _quorum
     ) public {
         DocumentVoting memory docVoting = DocumentVoting({
             documentId: currentDocumentId,
             owner: msg.sender,
             documentCid: _documentCid,
-            participants: participants,
-            quorum: quorum,
-            expiration: expiration
+            participants: _participants,
+            expiration: _expiration,
+            quorum: _quorum,
+            currentVotes: new uint8[](0)
         });
 
         docIdToCid[currentDocumentId] = _documentCid;
         docCidToVoting[_documentCid] = docVoting;
 
         currentDocumentId += 1;
+    }
+
+    function addVote(string memory _documentCid, uint8 _vote) public {
+        DocumentVoting storage docVoting = docCidToVoting[_documentCid];
+        docVoting.currentVotes.push(_vote);        
     }
 
     function getOwnerDocuments(address _owner) public view returns (DocumentVoting[] memory) {
