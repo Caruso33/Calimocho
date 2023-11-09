@@ -7,7 +7,7 @@ import path from 'path';
 import { BaseContract, Interface, Signer } from 'ethers';
 import { config, deployments, ethers, getNamedAccounts } from 'hardhat';
 import { ABI, Address, DeployFunction, Deployment as DeploymentData } from 'hardhat-deploy/types';
-import { EAS, EIP712Proxy, Indexer, SchemaRegistry } from '../components/Contracts';
+import { CalimochoResolver, EAS, EIP712Proxy, Indexer, SchemaRegistry } from '../components/Contracts';
 import Logger from '../utils/Logger';
 import { DeploymentNetwork } from './Constants';
 
@@ -36,7 +36,8 @@ export enum NewInstanceName {
   SchemaRegistry = 'SchemaRegistry',
   EIP712Proxy = 'EIP712Proxy',
   Indexer = 'Indexer',
-  Calimocho = 'Calimocho'
+  Calimocho = 'Calimocho',
+  CalimochoResolver = 'CalimochoResolver',
 }
 
 export const InstanceName = {
@@ -53,7 +54,9 @@ const DeployedNewContracts = {
   EAS: deployed<EAS>(InstanceName.EAS),
   SchemaRegistry: deployed<SchemaRegistry>(InstanceName.SchemaRegistry),
   EIP712Proxy: deployed<EIP712Proxy>(InstanceName.EIP712Proxy),
-  Indexer: deployed<Indexer>(InstanceName.Indexer)
+  Indexer: deployed<Indexer>(InstanceName.Indexer),
+  Calimocho: deployed<Calimocho>(InstanceName.Calimocho),
+  CalimochoResolver: deployed<CalimochoResolver>(InstanceName.CalimochoResolver),
 };
 
 export const DeployedContracts = {

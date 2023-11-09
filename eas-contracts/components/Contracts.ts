@@ -20,7 +20,9 @@ import {
   TestERC20Token__factory,
   TestSchemaResolver__factory,
   TokenResolver__factory,
-  ValueResolver__factory
+  ValueResolver__factory,
+  Calimocho__factory,
+  CalimochoResolver__factory,
 } from '../typechain-types';
 
 export * from '../typechain-types';
@@ -100,7 +102,10 @@ const getContracts = (signer?: Signer) => ({
   TestERC20Token: deployOrAttach(TestERC20Token__factory, signer),
   TestSchemaResolver: deployOrAttach(TestSchemaResolver__factory, signer),
   TokenResolver: deployOrAttach(TokenResolver__factory, signer),
-  ValueResolver: deployOrAttach(ValueResolver__factory, signer)
+  ValueResolver: deployOrAttach(ValueResolver__factory, signer),
+
+  Calimocho: deployOrAttach(Calimocho__factory, signer),
+  CalimochoResolver: deployOrAttach(CalimochoResolver__factory, signer),
 });
 /* eslint-enable camelcase */
 

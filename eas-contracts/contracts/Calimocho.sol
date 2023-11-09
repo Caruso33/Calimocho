@@ -53,6 +53,10 @@ contract Calimocho {
         return ownerToVotings[_owner];
     }
 
+    function getDocument(string memory _documentCid) public view returns (DocumentVoting memory) {
+        return docCidToVoting[_documentCid];
+    }
+
  function getAllDocuments() public view returns (DocumentVoting[] memory) {
     uint256 totalDocuments = currentDocumentId;
     DocumentVoting[] memory allDocuments = new DocumentVoting[](totalDocuments);
