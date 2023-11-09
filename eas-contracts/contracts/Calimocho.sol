@@ -11,6 +11,7 @@ contract Calimocho {
 
     struct DocumentVoting {
         uint documentId;
+        string documentName;
         address owner;
         string documentCid;
         address[] participants;
@@ -20,6 +21,7 @@ contract Calimocho {
     }
 
     function registerDocument(
+        string memory _documentName,
         string memory _documentCid,
         address[] memory _participants,
         uint64 _expiration,
@@ -27,6 +29,7 @@ contract Calimocho {
     ) public {
         DocumentVoting memory docVoting = DocumentVoting({
             documentId: currentDocumentId,
+            documentName: _documentName,
             owner: msg.sender,
             documentCid: _documentCid,
             participants: _participants,
@@ -49,4 +52,17 @@ contract Calimocho {
     function getOwnerDocuments(address _owner) public view returns (DocumentVoting[] memory) {
         return ownerToVotings[_owner];
     }
+
+ function getAllDocuments() public view returns (DocumentVoting[] memory) {
+    uint256 totalDocuments = currentDocumentId;
+    DocumentVoting[] memory allDocuments = new DocumentVoting[](totalDocuments);
+
+    for (uint256 i = 0; i < totalDocuments; i++) {
+        string memory documentCid = docIdToCid[i];
+        DocumentVoting memory docVoting = docCidToVoting[documentCid];
+        allDocuments[i] = docVoting;
+    }
+
+    return allDocuments;
+}
 }
